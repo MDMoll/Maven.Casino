@@ -1,5 +1,6 @@
 package io.zipcoder.casino.casino.games.dicegames;
 
+import io.zipcoder.casino.casino.games.dicegames.diceutilities.BetExplanations;
 import io.zipcoder.casino.casino.games.dicegames.diceutilities.Dice;
 import io.zipcoder.casino.casino.games.Game;
 import io.zipcoder.casino.casino.Casino;
@@ -10,17 +11,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static io.zipcoder.casino.casino.games.dicegames.diceutilities.CrapsConstants.*;
+
 public class Craps implements Game {
     Console console = Console.getConsole();
     private CrapsPlayer user = new CrapsPlayer(Casino.getProfile());
     private int initialBalance = getUser().getProfile().getBalance();
     private int adjustedBalance = 0;
     private int betAmount = 0;
-    private final int[] anyCraps = {2, 3, 12};
-    private final int[] hornBetRolls = {2, 3, 11, 12};
-    private final int[] hardwaysRolls = {4, 6, 8, 10};
-    private final int[] placeNumberRolls = {4, 5, 6, 8, 9, 10};
-    private final int[] fieldNumberRolls = {2, 3, 4, 9, 10, 11, 12};
     private int point = 0;
     private boolean isFirstRoll = true;
     private int hardwaysRoll;
@@ -163,28 +161,6 @@ public class Craps implements Game {
         betMap.put("The Field", false);
         betMap.put("The Horn", false);
         betMap.put("Hardways", false);
-    }
-
-    private enum BetExplanations {
-        PLACE("The Place bet wins if the chosen number is rolled before a 7"),
-        LAY("The Lay bet wins if a 7 is rolled before the point"),
-        ANYCRAPS("Any Craps pays off on 2, 3 or 12 before rolling a 7"),
-        FIELD("The Field wins if 4, 5, 6, 8, 9 or 10 hits before 7"),
-        HORN("The Horn wins on 2, 3, 11 or 12 before rolling a 7"),
-        HARDWAYS("Hardways involves two dice of the same face value, which must be hit before 7 or the corresponding sum thrown 'easy'\n");
-        private String betRules;
-
-        BetExplanations(String betRules) {
-            this.betRules = betRules;
-        }
-
-        public String getExplanations() {
-            return betRules;
-        }
-
-        public static Stream<BetExplanations> stream() {
-            return Stream.of(BetExplanations.values());
-        }
     }
 
     public Craps() {

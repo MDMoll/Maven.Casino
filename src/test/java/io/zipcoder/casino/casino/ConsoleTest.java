@@ -35,12 +35,12 @@ public class ConsoleTest {
         // Given
         String input = "Welcome to the number %s casino!";
         String[] arguments = {"1"};
-        String expected = String.format(input, arguments);
+        String expected = String.format(input, (Object[]) arguments);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Console console = new Console(System.in, new PrintStream(outputStream));
 
         // When
-        console.print(input, arguments);
+        console.print(input, (Object[]) arguments);
         String actual = outputStream.toString();
 
         // Then
@@ -51,7 +51,7 @@ public class ConsoleTest {
     public void testPrintLn1() {
         // Given
         String input = "Welcome to the number 1 casino!";
-        String expected = String.format(input + "\n");
+        String expected = input + "\n";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Console console = new Console(System.in, new PrintStream(outputStream));
 
@@ -68,12 +68,12 @@ public class ConsoleTest {
         // Given
         String input = "Welcome to the number %s casino!";
         String[] arguments = {"1"};
-        String expected = String.format(input + "\n", arguments);
+        String expected = String.format(input + "\n", (Object[]) arguments);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Console console = new Console(System.in, new PrintStream(outputStream));
 
         // When
-        console.println(input, arguments);
+        console.println(input, (Object[]) arguments);
         String actual = outputStream.toString();
 
         // Then
